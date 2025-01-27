@@ -1,39 +1,33 @@
 <template>
-    <div>
-        <label :for="id" class="block text-sm font-medium text-gray-700">{{ label }}</label>
-        <input 
-            :id="id" 
-            :value="modelValue" 
-            @input="$emit('update:modelValue', $event.target.value)" 
-            :type="type" 
-            :placeholder="placeholder" 
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm px-4 py-2"
-        >
-    </div>
+    <el-form-item :label="label" label-position="top">
+        <el-input 
+            v-if="type === 'text'" 
+            :model-value="modelValue"
+            @input="$emit('update:modelValue', $event)" 
+        />
+        <el-input-number 
+            v-else 
+            :model-value="modelValue"
+            @update:modelValue="$emit('update:modelValue', $event)" 
+            controls-position="right"
+        />
+    </el-form-item>
 </template>
 
 <script>
 export default {
     props: {
-        id: {
-            type: String,
-            required: true
-        },
         label: {
             type: String,
             required: true
         },
         modelValue: {
             type: [String, Number],
-            default: ''
+            required: true
         },
         type: {
             type: String,
             default: 'text'
-        },
-        placeholder: {
-            type: String,
-            default: ''
         }
     }
 };

@@ -1,47 +1,40 @@
 <template>
-    <div class="p-6">
-        <form @submit.prevent="searchHouses" class="space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormField v-for="(field, index) in fields" :key="index" :id="field.id" :label="field.label" :type="field.type" v-model="searchParams[field.id]" />
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700">Price Range</label>
-                    <div class="flex space-x-4">
-                        <FormField id="price_min" label="Min Price" type="number" placeholder="Min Price" v-model="searchParams.price_min" />
-                        <FormField id="price_max" label="Max Price" type="number" placeholder="Max Price" v-model="searchParams.price_max" />
-                    </div>
-                </div>
+    <el-card class="search-card">
+        <el-form @submit.prevent="searchHouses" label-position="top">
+            <div class="form-grid">
+                <FormField 
+                    v-for="(field, index) in fields" 
+                    :key="index" 
+                    :label="field.label" 
+                    :modelValue="searchParams[field.model]"
+                    @update:modelValue="value => searchParams[field.model] = value"
+                    :type="field.type" 
+                />
+                <PriceRange 
+                    :priceMin="searchParams.price_min" 
+                    @update:priceMin="value => searchParams.price_min = value"
+                    :priceMax="searchParams.price_max" 
+                    @update:priceMax="value => searchParams.price_max = value"
+                />
             </div>
-            <button type="submit" class="w-full md:w-auto px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm">Search</button>
-        </form>
-        <div v-if="loading" class="mt-4 loading-message">Loading...</div>
-        <div v-if="houses.length === 0 && !loading" class="mt-4 no-results-message">No results found.</div>
-        <div class="w-full overflow-x-auto">
-            <table v-if="houses.length > 0" class="mt-4 w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th class="border-b py-2 px-4 text-left">Name</th>
-                        <th class="border-b py-2 px-4 text-left">Price</th>
-                        <th class="border-b py-2 px-4 text-left">Bedrooms</th>
-                        <th class="border-b py-2 px-4 text-left">Bathrooms</th>
-                        <th class="border-b py-2 px-4 text-left">Storeys</th>
-                        <th class="border-b py-2 px-4 text-left">Garages</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <HouseRow v-for="house in houses" :key="house.id" :house="house" />
-                </tbody>
-            </table>
+            <el-button type="primary" native-type="submit" class="search-button">Search</el-button>
+        </el-form>
+        <div class="result-area">
+            <el-loading v-if="loading" :lock="true" text="Loading..."></el-loading>
+            <el-alert v-if="houses.length === 0 && !loading" class="mt-4" title="No results found" type="info"></el-alert>
+            <HouseRow v-if="houses.length > 0" :houses="houses" />
         </div>
-    </div>
+    </el-card>
 </template>
 
 <script>
 import axios from 'axios';
 import FormField from './FormField.vue';
+import PriceRange from './PriceRange.vue';
 import HouseRow from './HouseRow.vue';
 
 export default {
-    components: { FormField, HouseRow },
+    components: { FormField, PriceRange, HouseRow },
     data() {
         return {
             houses: [],
@@ -56,11 +49,11 @@ export default {
                 price_max: ''
             },
             fields: [
-                { id: 'name', label: 'Name', type: 'text' },
-                { id: 'bedrooms', label: 'Bedrooms', type: 'number' },
-                { id: 'bathrooms', label: 'Bathrooms', type: 'number' },
-                { id: 'storeys', label: 'Storeys', type: 'number' },
-                { id: 'garages', label: 'Garages', type: 'number' },
+                { label: 'Name', model: 'name', type: 'text' },
+                { label: 'Bedrooms', model: 'bedrooms', type: 'number' },
+                { label: 'Bathrooms', model: 'bathrooms', type: 'number' },
+                { label: 'Storeys', model: 'storeys', type: 'number' },
+                { label: 'Garages', model: 'garages', type: 'number' }
             ]
         };
     },
@@ -84,3 +77,33 @@ export default {
     }
 };
 </script>
+
+<style>
+.search-card {
+    padding: 24px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.search-button {
+    margin-top: 16px;
+}
+
+.result-area {
+    margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .price-col {
+        margin-bottom: 16px;
+    }
+}
+</style>

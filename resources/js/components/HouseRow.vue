@@ -1,19 +1,21 @@
 <template>
-    <tr>
-        <td class="border-b py-2 px-4">{{ house.name }}</td>
-        <td class="border-b py-2 px-4">{{ house.price }}</td>
-        <td class="border-b py-2 px-4">{{ house.bedrooms }}</td>
-        <td class="border-b py-2 px-4">{{ house.bathrooms }}</td>
-        <td class="border-b py-2 px-4">{{ house.storeys }}</td>
-        <td class="border-b py-2 px-4">{{ house.garages }}</td>
-    </tr>
+    <div class="overflow-x-auto">
+        <el-table :data="houses" border>
+            <el-table-column prop="name" label="Name" />
+            <el-table-column prop="price" label="Price" />
+            <el-table-column prop="bedrooms" label="Bedrooms" />
+            <el-table-column prop="bathrooms" label="Bathrooms" />
+            <el-table-column prop="storeys" label="Storeys" />
+            <el-table-column prop="garages" label="Garages" />
+        </el-table>
+    </div>
 </template>
 
 <script>
 export default {
     props: {
-        house: {
-            type: Object,
+        houses: {
+            type: Array,
             required: true
         }
     }
