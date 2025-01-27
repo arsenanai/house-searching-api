@@ -11,23 +11,23 @@ class HouseController extends Controller
     {
         $query = House::query();
 
-        if ($request->has('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
+        if ($request->query('name')) {
+            $query->where('name', 'like', '%' . $request->query('name') . '%');
         }
-        if ($request->has('bedrooms')) {
-            $query->where('bedrooms', $request->bedrooms);
+        if ($request->query('bedrooms')) {
+            $query->where('bedrooms', $request->query('bedrooms'));
         }
-        if ($request->has('bathrooms')) {
-            $query->where('bathrooms', $request->bathrooms);
+        if ($request->query('bathrooms')) {
+            $query->where('bathrooms', $request->query('bathrooms'));
         }
-        if ($request->has('storeys')) {
-            $query->where('storeys', $request->storeys);
+        if ($request->query('storeys')) {
+            $query->where('storeys', $request->query('storeys'));
         }
-        if ($request->has('garages')) {
-            $query->where('garages', $request->garages);
+        if ($request->query('garages')) {
+            $query->where('garages', $request->query('garages'));
         }
-        if ($request->has('price_min') && $request->has('price_max')) {
-            $query->whereBetween('price', [$request->price_min, $request->price_max]);
+        if ($request->query('price_min') && $request->query('price_max')) {
+            $query->whereBetween('price', [$request->query('price_min'), $request->query('price_max')]);
         }
 
         return response()->json($query->get());
