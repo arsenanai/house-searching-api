@@ -1,0 +1,65 @@
+
+> test
+> vitest
+
+[?25l
+ DEV  v3.0.4 /Users/rsa/lab/house
+
+ ❯ resources/js/tests/unit/HouseSearchForm.spec.js (4 tests | 4 failed) 33ms
+   × HouseSearch.vue > renders form fields correctly 19ms
+     → expected false to be true // Object.is equality
+   × HouseSearch.vue > fetches houses when form is submitted 8ms
+     → expected +0 to be 1 // Object.is equality
+   × HouseSearch.vue > displays loading indicator 4ms
+     → expected 'NameBedroomsBathroomsStoreysGaragesPr…' to contain 'Loading...'
+   × HouseSearch.vue > displays no results message 3ms
+     → expected 'NameBedroomsBathroomsStoreysGaragesPr…' to contain 'No results found.'
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  11:58:38
+   Duration  988ms (transform 31ms, setup 0ms, collect 142ms, tests 33ms, environment 345ms, prepare 41ms)
+
+ FAIL  Tests failed. Watching for file changes...
+       press h to show help, press q to quit
+c[3J RERUN  resources/js/components/HouseSearch.vue x1 
+
+ ❯ resources/js/tests/unit/HouseSearchForm.spec.js (4 tests | 4 failed) 34ms
+   × HouseSearch.vue > renders form fields correctly 19ms
+     → expected false to be true // Object.is equality
+   × HouseSearch.vue > fetches houses when form is submitted 8ms
+     → expected +0 to be 1 // Object.is equality
+   × HouseSearch.vue > displays loading indicator 4ms
+     → expected 'NameBedroomsBathroomsStoreysGaragesPr…' to contain 'Loading...'
+   × HouseSearch.vue > displays no results message 3ms
+     → expected 'NameBedroomsBathroomsStoreysGaragesPr…' to contain 'No results found.'
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  11:59:54
+   Duration  141ms
+
+ FAIL  Tests failed. Watching for file changes...
+       press h to show help, press q to quit
+c[3J RERUN  resources/js/tests/unit/HouseSearchForm.spec.js x2 
+
+ ❯ resources/js/tests/unit/HouseSearchForm.spec.js (4 tests | 4 failed) 34ms
+   × HouseSearch.vue > renders form fields correctly 19ms
+     → expected false to be true // Object.is equality
+   × HouseSearch.vue > fetches houses when form is submitted 8ms
+     → expected +0 to be 1 // Object.is equality
+   × HouseSearch.vue > displays loading indicator 3ms
+     → expected 'NameBedroomsBathroomsStoreysGaragesPr…' to contain 'Loading...'
+   × HouseSearch.vue > displays no results message 3ms
+     → expected 'NameBedroomsBathroomsStoreysGaragesPr…' to contain 'No results found.'
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  12:00:12
+   Duration  118ms
+
+ FAIL  Tests failed. Watching for file changes...
+       press h to show help, press q to quit
+Cancelling test run. Press CTRL+c again to exit forcefully.
+
+[?25h

@@ -1,5 +1,4 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
@@ -10,11 +9,9 @@ export default defineConfig({
             '@': path.resolve(__dirname, 'resources/js')
         }
     },
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
-        vue(),
-    ],
+    plugins: [vue()],
+    test: {
+        globals: true,
+        environment: 'jsdom'
+    }
 });
